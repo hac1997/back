@@ -124,25 +124,25 @@ WHERE NOT EXISTS (SELECT 1 FROM posts WHERE post_id = 105);
 -- Post Categories (ElementCollection)
 -- ====================================
 
-INSERT INTO posts_categories (post_post_id, categories)
+INSERT INTO post_categories (post_post_id, categories)
 SELECT 101, 'WEB_DEVELOPMENT'
-WHERE NOT EXISTS (SELECT 1 FROM posts_categories WHERE post_post_id = 101 AND categories = 'WEB_DEVELOPMENT');
+WHERE NOT EXISTS (SELECT 1 FROM post_categories WHERE post_post_id = 101 AND categories = 'WEB_DEVELOPMENT');
 
-INSERT INTO posts_categories (post_post_id, categories)
+INSERT INTO post_categories (post_post_id, categories)
 SELECT 102, 'SOFTWARE'
-WHERE NOT EXISTS (SELECT 1 FROM posts_categories WHERE post_post_id = 102 AND categories = 'SOFTWARE');
+WHERE NOT EXISTS (SELECT 1 FROM post_categories WHERE post_post_id = 102 AND categories = 'SOFTWARE');
 
-INSERT INTO posts_categories (post_post_id, categories)
+INSERT INTO post_categories (post_post_id, categories)
 SELECT 103, 'DEVOPS'
-WHERE NOT EXISTS (SELECT 1 FROM posts_categories WHERE post_post_id = 103 AND categories = 'DEVOPS');
+WHERE NOT EXISTS (SELECT 1 FROM post_categories WHERE post_post_id = 103 AND categories = 'DEVOPS');
 
-INSERT INTO posts_categories (post_post_id, categories)
+INSERT INTO post_categories (post_post_id, categories)
 SELECT 104, 'SOFTWARE'
-WHERE NOT EXISTS (SELECT 1 FROM posts_categories WHERE post_post_id = 104 AND categories = 'SOFTWARE');
+WHERE NOT EXISTS (SELECT 1 FROM post_categories WHERE post_post_id = 104 AND categories = 'SOFTWARE');
 
-INSERT INTO posts_categories (post_post_id, categories)
+INSERT INTO post_categories (post_post_id, categories)
 SELECT 105, 'SECURITY'
-WHERE NOT EXISTS (SELECT 1 FROM posts_categories WHERE post_post_id = 105 AND categories = 'SECURITY');
+WHERE NOT EXISTS (SELECT 1 FROM post_categories WHERE post_post_id = 105 AND categories = 'SECURITY');
 
 -- ====================================
 -- Post Tags (ManyToMany)
