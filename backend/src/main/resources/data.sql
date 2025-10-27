@@ -32,37 +32,37 @@ WHERE NOT EXISTS (SELECT 1 FROM users WHERE user_id = 5);
 -- User Roles
 -- ====================================
 
-INSERT INTO user_role (user_id, role)
+INSERT INTO user_roles (user_user_id, role)
 SELECT 1, 'ROLE_USER'
-WHERE NOT EXISTS (SELECT 1 FROM user_role WHERE user_id = 1 AND role = 'ROLE_USER');
+WHERE NOT EXISTS (SELECT 1 FROM user_roles WHERE user_user_id = 1 AND role = 'ROLE_USER');
 
-INSERT INTO user_role (user_id, role)
+INSERT INTO user_roles (user_user_id, role)
 SELECT 2, 'ROLE_USER'
-WHERE NOT EXISTS (SELECT 1 FROM user_role WHERE user_id = 2 AND role = 'ROLE_USER');
+WHERE NOT EXISTS (SELECT 1 FROM user_roles WHERE user_user_id = 2 AND role = 'ROLE_USER');
 
-INSERT INTO user_role (user_id, role)
+INSERT INTO user_roles (user_user_id, role)
 SELECT 3, 'ROLE_USER'
-WHERE NOT EXISTS (SELECT 1 FROM user_role WHERE user_id = 3 AND role = 'ROLE_USER');
+WHERE NOT EXISTS (SELECT 1 FROM user_roles WHERE user_user_id = 3 AND role = 'ROLE_USER');
 
-INSERT INTO user_role (user_id, role)
+INSERT INTO user_roles (user_user_id, role)
 SELECT 4, 'ROLE_USER'
-WHERE NOT EXISTS (SELECT 1 FROM user_role WHERE user_id = 4 AND role = 'ROLE_USER');
+WHERE NOT EXISTS (SELECT 1 FROM user_roles WHERE user_user_id = 4 AND role = 'ROLE_USER');
 
-INSERT INTO user_role (user_id, role)
+INSERT INTO user_roles (user_user_id, role)
 SELECT 4, 'ROLE_MODERATOR'
-WHERE NOT EXISTS (SELECT 1 FROM user_role WHERE user_id = 4 AND role = 'ROLE_MODERATOR');
+WHERE NOT EXISTS (SELECT 1 FROM user_roles WHERE user_user_id = 4 AND role = 'ROLE_MODERATOR');
 
-INSERT INTO user_role (user_id, role)
+INSERT INTO user_roles (user_user_id, role)
 SELECT 5, 'ROLE_USER'
-WHERE NOT EXISTS (SELECT 1 FROM user_role WHERE user_id = 5 AND role = 'ROLE_USER');
+WHERE NOT EXISTS (SELECT 1 FROM user_roles WHERE user_user_id = 5 AND role = 'ROLE_USER');
 
-INSERT INTO user_role (user_id, role)
+INSERT INTO user_roles (user_user_id, role)
 SELECT 5, 'ROLE_MODERATOR'
-WHERE NOT EXISTS (SELECT 1 FROM user_role WHERE user_id = 5 AND role = 'ROLE_MODERATOR');
+WHERE NOT EXISTS (SELECT 1 FROM user_roles WHERE user_user_id = 5 AND role = 'ROLE_MODERATOR');
 
-INSERT INTO user_role (user_id, role)
+INSERT INTO user_roles (user_user_id, role)
 SELECT 5, 'ROLE_ADMIN'
-WHERE NOT EXISTS (SELECT 1 FROM user_role WHERE user_id = 5 AND role = 'ROLE_ADMIN');
+WHERE NOT EXISTS (SELECT 1 FROM user_roles WHERE user_user_id = 5 AND role = 'ROLE_ADMIN');
 
 -- ====================================
 -- Tags
