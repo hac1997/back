@@ -228,42 +228,42 @@ INSERT INTO votes (vote_id, vote, user_id, post_id)
 SELECT 1005, false, 3, 104
 WHERE NOT EXISTS (SELECT 1 FROM votes WHERE vote_id = 1005);
 
--- ====================================
--- Reports (Example: one pending report)
--- ====================================
+-- -- ====================================
+-- -- Reports (Example: one pending report)
+-- -- ====================================
 
-INSERT INTO reports (report_id, report_type, status, reason, reporter_id, reported_user_id, reported_post_id, reported_comment_id, reviewed_by, review_notes, created_at, reviewed_at)
-SELECT 2001, 'POST', 'PENDING', 'This post contains spam and irrelevant content.', 3, NULL, 104, NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL
-WHERE NOT EXISTS (SELECT 1 FROM reports WHERE report_id = 2001);
+-- INSERT INTO reports (report_id, report_type, status, reason, reporter_id, reported_user_id, reported_post_id, reported_comment_id, reviewed_by, review_notes, created_at, reviewed_at)
+-- SELECT 2001, 'POST', 'PENDING', 'This post contains spam and irrelevant content.', 3, NULL, 104, NULL, NULL, NULL, CURRENT_TIMESTAMP, NULL
+-- WHERE NOT EXISTS (SELECT 1 FROM reports WHERE report_id = 2001);
 
--- ====================================
--- Discussions (Example: one open discussion)
--- ====================================
+-- -- ====================================
+-- -- Discussions (Example: one open discussion)
+-- -- ====================================
 
-INSERT INTO discussions (discussion_id, discussion_type, status, description, report_id, target_user_id, target_post_id, target_comment_id, created_by, created_at, closed_at, resolution)
-SELECT 3001, 'CONTENT_REMOVAL', 'OPEN', 'Discussion about removing potentially spam post. Community input needed.', 2001, NULL, 104, NULL, 5, CURRENT_TIMESTAMP, NULL, NULL
-WHERE NOT EXISTS (SELECT 1 FROM discussions WHERE discussion_id = 3001);
+-- INSERT INTO discussions (discussion_id, discussion_type, status, description, report_id, target_user_id, target_post_id, target_comment_id, created_by, created_at, closed_at, resolution)
+-- SELECT 3001, 'CONTENT_REMOVAL', 'OPEN', 'Discussion about removing potentially spam post. Community input needed.', 2001, NULL, 104, NULL, 5, CURRENT_TIMESTAMP, NULL, NULL
+-- WHERE NOT EXISTS (SELECT 1 FROM discussions WHERE discussion_id = 3001);
 
--- ====================================
--- Discussion Votes
--- ====================================
+-- -- ====================================
+-- -- Discussion Votes
+-- -- ====================================
 
-INSERT INTO discussion_votes (vote_id, discussion_id, moderator_id, in_favor, justification, voted_at)
-SELECT 4001, 3001, 4, true, 'The post seems to lack technical depth and appears promotional.', CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM discussion_votes WHERE vote_id = 4001);
+-- INSERT INTO discussion_votes (vote_id, discussion_id, moderator_id, in_favor, justification, voted_at)
+-- SELECT 4001, 3001, 4, true, 'The post seems to lack technical depth and appears promotional.', CURRENT_TIMESTAMP
+-- WHERE NOT EXISTS (SELECT 1 FROM discussion_votes WHERE vote_id = 4001);
 
--- ====================================
--- Moderation Logs
--- ====================================
+-- -- ====================================
+-- -- Moderation Logs
+-- -- ====================================
 
-INSERT INTO moderation_logs (log_id, action, moderator_id, target_user_id, target_post_id, target_comment_id, related_discussion_id, notes, performed_at)
-SELECT 5001, 'HIDE_POST', 4, NULL, 104, NULL, 3001, 'Temporarily hidden pending discussion resolution.', CURRENT_TIMESTAMP
-WHERE NOT EXISTS (SELECT 1 FROM moderation_logs WHERE log_id = 5001);
+-- INSERT INTO moderation_logs (log_id, action, moderator_id, target_user_id, target_post_id, target_comment_id, related_discussion_id, notes, performed_at)
+-- SELECT 5001, 'HIDE_POST', 4, NULL, 104, NULL, 3001, 'Temporarily hidden pending discussion resolution.', CURRENT_TIMESTAMP
+-- WHERE NOT EXISTS (SELECT 1 FROM moderation_logs WHERE log_id = 5001);
 
--- ====================================
--- Appeals (Example: one pending appeal)
--- ====================================
+-- -- ====================================
+-- -- Appeals (Example: one pending appeal)
+-- -- ====================================
 
-INSERT INTO appeals (appeal_id, user_id, status, reason, related_discussion_id, reviewed_by, review_notes, created_at, reviewed_at)
-SELECT 6001, 1, 'PENDING', 'I believe my post was removed unfairly. It was relevant to the discussion topic.', 3001, NULL, NULL, CURRENT_TIMESTAMP, NULL
-WHERE NOT EXISTS (SELECT 1 FROM appeals WHERE appeal_id = 6001);
+-- INSERT INTO appeals (appeal_id, user_id, status, reason, related_discussion_id, reviewed_by, review_notes, created_at, reviewed_at)
+-- SELECT 6001, 1, 'PENDING', 'I believe my post was removed unfairly. It was relevant to the discussion topic.', 3001, NULL, NULL, CURRENT_TIMESTAMP, NULL
+-- WHERE NOT EXISTS (SELECT 1 FROM appeals WHERE appeal_id = 6001);

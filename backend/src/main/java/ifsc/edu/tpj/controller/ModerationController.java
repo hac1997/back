@@ -5,7 +5,7 @@ import ifsc.edu.tpj.dto.DiscussionRequestDTO;
 import ifsc.edu.tpj.dto.DiscussionVoteRequestDTO;
 import ifsc.edu.tpj.dto.ReportRequestDTO;
 import ifsc.edu.tpj.model.*;
-import ifsc.edu.tpj.model.enums.ReportStatus;
+import ifsc.edu.tpj.model.enums.*;
 import ifsc.edu.tpj.service.DiscussionService;
 import ifsc.edu.tpj.service.ModerationLogService;
 import ifsc.edu.tpj.service.ModerationService;

@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000",  allowCredentials = "true")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/posts")
 public class CommentController {
 

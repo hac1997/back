@@ -1,5 +1,6 @@
-package ifsc.edu.tpj.controller;
+package ifsc.edu.tpj;
 
+import ifsc.edu.tpj.controller.AuthController;
 import ifsc.edu.tpj.dto.AuthRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
