@@ -25,18 +25,17 @@ public class CommentService {
     public Comment create(Long postId, CommentRequestDTO dto){
         Post post = postRepository.findById(postId)
                 .orElseThrow(()-> new RuntimeException("Post not found: " + postId));
-        
+
         if(post.isLocked()){
-        return commentRepository.save(Comment.builder()
-                        .author(userService.findUserById(dto.userId()))
-                        .body(dto.body()).post(post)
-                        .post(post)
-                        .build());
-        }
-        else{
-            return null;
+            throw new RuntimeException("Post is locked and cannot receive new comments");
         }
 
+        return commentRepository.save(Comment.builder()
+                        .author(userService.findUserById(dto.userId()))
+                        .body(dto.body())
+                        .post(post)
+                        .visible(true)
+                        .build());
     }
 
 

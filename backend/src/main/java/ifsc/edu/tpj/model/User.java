@@ -1,5 +1,6 @@
 package ifsc.edu.tpj.model;
 
+import ifsc.edu.tpj.model.enums.UserStatus;
 import ifsc.edu.tpj.util.ValidPasswd;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -8,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -41,6 +43,14 @@ public class User implements UserDetails {
     private boolean isEmailVerified;
     private String emailVerificationCode;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private UserStatus status;
+
+    private LocalDateTime suspendedUntil;
+
+    @Column(columnDefinition = "TEXT")
+    private String suspensionReason;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
@@ -69,7 +79,15 @@ public class User implements UserDetails {
     public boolean isAccountNonExpired() { return true; }
 
     @Override
-    public boolean isAccountNonLocked() { return true; }
+    public boolean isAccountNonLocked() {
+        if (status == UserStatus.BANNED) {
+            return false;
+        }
+        if (status == UserStatus.SUSPENDED && suspendedUntil != null) {
+            return LocalDateTime.now().isAfter(suspendedUntil);
+        }
+        return true;
+    }
 
     @Override
     public boolean isCredentialsNonExpired() { return true; }

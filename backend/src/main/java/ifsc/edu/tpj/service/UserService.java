@@ -2,6 +2,7 @@ package ifsc.edu.tpj.service;
 
 import ifsc.edu.tpj.dto.UserRequestDTO;
 import ifsc.edu.tpj.model.User;
+import ifsc.edu.tpj.model.enums.UserStatus;
 import ifsc.edu.tpj.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -46,6 +47,7 @@ public class UserService implements UserDetailsService {
                         .roles(List.of("USER"))
                         .isEmailVerified(false)
                         .emailVerificationCode(code)
+                        .status(UserStatus.ACTIVE)
                 .build());
 
         mailService.sendMailMessage(
