@@ -11,6 +11,8 @@ export interface Post {
   tags: string[];
   author: Author;
   createdAt: string;
+  isLocked: boolean;
+  visible: boolean;
 }
 
 export interface PostRequest {

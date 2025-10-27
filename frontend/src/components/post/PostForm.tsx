@@ -1,5 +1,6 @@
 'use client';
 import { useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
 import { PostService } from "@/services/postService";
 
 interface PostFormProps {
@@ -7,6 +8,7 @@ interface PostFormProps {
 }
 
 export default function PostForm({ onPostCreated }: PostFormProps) {
+  const { user } = useAuth();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
@@ -23,7 +25,7 @@ export default function PostForm({ onPostCreated }: PostFormProps) {
         title,
         body,
         tags: tags.split(",").map(t => t.trim()).filter(t => t),
-        userId: 1,
+        userId: user?.userId || 1,
       });
       setTitle("");
       setBody("");
@@ -39,11 +41,11 @@ export default function PostForm({ onPostCreated }: PostFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white shadow p-6 rounded-2xl mb-6"
+      className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 shadow-lg p-6 rounded-xl mb-6"
     >
-      <h2 className="text-lg font-semibold mb-4">Criar novo post</h2>
+      <h2 className="text-lg font-semibold mb-4 text-white">Criar novo post</h2>
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+        <div className="bg-red-500/10 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg mb-4">
           {error}
         </div>
       )}
@@ -52,7 +54,7 @@ export default function PostForm({ onPostCreated }: PostFormProps) {
         placeholder="Título"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="w-full border border-gray-300 p-3 rounded-lg mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full bg-slate-900/50 border border-slate-600 text-white placeholder-slate-500 p-3 rounded-lg mb-3 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
         required
         disabled={loading}
       />
@@ -60,7 +62,7 @@ export default function PostForm({ onPostCreated }: PostFormProps) {
         placeholder="Escreva seu post..."
         value={body}
         onChange={(e) => setBody(e.target.value)}
-        className="w-full border border-gray-300 p-3 rounded-lg mb-3 h-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full bg-slate-900/50 border border-slate-600 text-white placeholder-slate-500 p-3 rounded-lg mb-3 h-32 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition resize-none"
         required
         disabled={loading}
       />
@@ -69,13 +71,13 @@ export default function PostForm({ onPostCreated }: PostFormProps) {
         placeholder="Tags (separadas por vírgula)"
         value={tags}
         onChange={(e) => setTags(e.target.value)}
-        className="w-full border border-gray-300 p-3 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full bg-slate-900/50 border border-slate-600 text-white placeholder-slate-500 p-3 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
         disabled={loading}
       />
       <button
         type="submit"
         disabled={loading}
-        className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-2 px-6 rounded-lg transition disabled:bg-slate-600 disabled:cursor-not-allowed"
       >
         {loading ? "Publicando..." : "Publicar"}
       </button>

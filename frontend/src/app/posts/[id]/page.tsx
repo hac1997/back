@@ -85,10 +85,10 @@ export default function PostPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Carregando...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-500"></div>
+          <p className="mt-4 text-slate-300">Carregando...</p>
         </div>
       </div>
     );
@@ -96,8 +96,8 @@ export default function PostPage() {
 
   if (error || !post) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-red-100 border border-red-400 text-red-700 px-6 py-4 rounded">
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+        <div className="bg-red-500/10 border border-red-500/50 text-red-400 px-6 py-4 rounded-lg">
           {error || "Post não encontrado"}
         </div>
       </div>
@@ -105,56 +105,63 @@ export default function PostPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <header className="bg-slate-800/80 backdrop-blur-sm border-b border-slate-700">
         <div className="max-w-4xl mx-auto px-4 py-6">
           <button
-            onClick={() => router.push("/")}
-            className="text-blue-600 hover:text-blue-800 mb-2"
+            onClick={() => router.push("/feed")}
+            className="text-emerald-400 hover:text-emerald-300 mb-2 transition"
           >
             ← Voltar
           </button>
-          <h1 className="text-3xl font-bold text-gray-900">Detalhes do Post</h1>
+          <h1 className="text-3xl font-bold text-white">Detalhes do Post</h1>
         </div>
       </header>
 
       <main className="max-w-4xl mx-auto px-4 py-8">
-        <div className="bg-white rounded-2xl shadow p-6 mb-6">
+        <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl shadow-lg p-6 mb-6">
           {!isEditing ? (
             <>
               <div className="flex justify-between items-start mb-4">
-                <h2 className="text-2xl font-bold text-gray-900">{post.title}</h2>
+                <div className="flex-1">
+                  <h2 className="text-2xl font-bold text-white mb-2">{post.title}</h2>
+                  {post.isLocked && (
+                    <span className="inline-block px-3 py-1 bg-red-500/20 text-red-400 text-sm rounded-lg border border-red-500/50">
+                      🔒 Post Trancado - Comentários desabilitados
+                    </span>
+                  )}
+                </div>
                 {canEdit(post.createdAt) && (
                   <div className="flex gap-2">
                     <button
                       onClick={() => setIsEditing(true)}
-                      className="text-blue-600 hover:text-blue-800 text-sm"
+                      className="text-emerald-400 hover:text-emerald-300 text-sm transition"
                     >
                       Editar
                     </button>
                     <button
                       onClick={handleDelete}
-                      className="text-red-600 hover:text-red-800 text-sm"
+                      className="text-red-400 hover:text-red-300 text-sm transition"
                     >
                       Excluir
                     </button>
                   </div>
                 )}
               </div>
-              <p className="text-gray-700 mb-4 whitespace-pre-wrap">{post.body}</p>
+              <p className="text-slate-300 mb-4 whitespace-pre-wrap">{post.body}</p>
               <div className="flex flex-wrap gap-2 mb-4">
                 {post.tags?.map((tag, i) => (
                   <span
                     key={i}
-                    className="bg-blue-100 text-blue-800 px-3 py-1 rounded-lg text-sm"
+                    className="bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-lg text-sm border border-emerald-500/30"
                   >
                     #{tag}
                   </span>
                 ))}
               </div>
-              <div className="text-sm text-gray-500 border-t pt-3">
-                <p>Por <span className="font-semibold">{post.author.name}</span></p>
-                <p>{new Date(post.createdAt).toLocaleString()}</p>
+              <div className="text-sm text-slate-400 border-t border-slate-700 pt-3">
+                <p>Por <span className="font-semibold text-slate-300">{post.author.name}</span></p>
+                <p className="text-slate-500">{new Date(post.createdAt).toLocaleString('pt-BR')}</p>
               </div>
             </>
           ) : (
@@ -163,13 +170,13 @@ export default function PostPage() {
                 type="text"
                 value={editTitle}
                 onChange={(e) => setEditTitle(e.target.value)}
-                className="w-full border border-gray-300 p-3 rounded-lg mb-3 text-xl font-bold"
+                className="w-full bg-slate-900/50 border border-slate-600 text-white p-3 rounded-lg mb-3 text-xl font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 required
               />
               <textarea
                 value={editBody}
                 onChange={(e) => setEditBody(e.target.value)}
-                className="w-full border border-gray-300 p-3 rounded-lg mb-3 h-48"
+                className="w-full bg-slate-900/50 border border-slate-600 text-white p-3 rounded-lg mb-3 h-48 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none"
                 required
               />
               <input
@@ -177,19 +184,19 @@ export default function PostPage() {
                 value={editTags}
                 onChange={(e) => setEditTags(e.target.value)}
                 placeholder="Tags (separadas por vírgula)"
-                className="w-full border border-gray-300 p-3 rounded-lg mb-4"
+                className="w-full bg-slate-900/50 border border-slate-600 text-white placeholder-slate-500 p-3 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <div className="flex gap-2">
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white py-2 px-6 rounded-lg transition"
                 >
                   Salvar
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsEditing(false)}
-                  className="bg-gray-300 text-gray-700 py-2 px-6 rounded-lg hover:bg-gray-400"
+                  className="bg-slate-700 hover:bg-slate-600 text-white py-2 px-6 rounded-lg transition"
                 >
                   Cancelar
                 </button>
@@ -199,8 +206,14 @@ export default function PostPage() {
         </div>
 
         <div className="mb-6">
-          <h3 className="text-xl font-semibold mb-4">Comentários ({comments.length})</h3>
-          <CommentForm postId={postId} onCommentCreated={loadPostData} />
+          <h3 className="text-xl font-semibold text-white mb-4">Comentários ({comments.length})</h3>
+          {!post.isLocked ? (
+            <CommentForm postId={postId} onCommentCreated={loadPostData} />
+          ) : (
+            <div className="bg-red-500/10 border border-red-500/50 text-red-400 px-4 py-3 rounded-lg text-center">
+              Este post está trancado e não aceita novos comentários.
+            </div>
+          )}
         </div>
 
         <CommentList comments={comments} onCommentUpdated={loadPostData} />

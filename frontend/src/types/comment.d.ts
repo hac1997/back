@@ -5,6 +5,8 @@ export interface Comment {
   body: string;
   author: Author;
   createdAt: string;
+  visible: boolean;
+  pinned: boolean;
 }
 
 export interface CommentRequest {
